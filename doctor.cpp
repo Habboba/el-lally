@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QString>
+#include "MainWindow.h"
 
 doctor::doctor(QWidget *parent, drclass doc)
     : QDialog(parent)
@@ -58,11 +59,12 @@ QString doctor::getAssignmentString(drclass& doc)
 
 void doctor::on_pushButton_profile_2_clicked()
 {
-    QString patientList;
+    QString patientList="";
     for (const auto& patient : currdoc.patients)
     {
         patientList += patient + "\n";
     }
+
 
     QMessageBox::information(this, tr("Patient List"), "Patients:\n" + patientList);
 }
@@ -80,5 +82,13 @@ void doctor::on_pushButton_schedule_clicked()
         scheduleText += patient + "\n";
     }
     QMessageBox::information(this, tr("Schedule"), scheduleText);
+}
+
+
+void doctor::on_pushButton_clicked()
+{
+    hide();
+    MainWindow* win=new MainWindow(this);
+    win->show();
 }
 

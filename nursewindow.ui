@@ -90,6 +90,19 @@
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>260</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>back</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

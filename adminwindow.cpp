@@ -6,7 +6,7 @@
 #include "doctor.h"
 #include "nursewindow.h"
 #include <QComboBox>
-
+#include "mainwindow.h"
 
 adminwindow::adminwindow(QWidget *parent,admin ad)
     : QDialog(parent)
@@ -99,5 +99,13 @@ void adminwindow::on_nurse_clicked()
 {
    ui->doc->setEnabled(false);
    ui->nursebox->setVisible(true);
+}
+
+
+void adminwindow::on_pushButton_clicked()
+{
+    hide();
+    MainWindow* win=new MainWindow(this);
+    win->show();
 }
 

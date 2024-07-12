@@ -7,7 +7,7 @@
 #include <QGraphicsView>
 #include <QBrush>
 #include <QPixmap>
-
+#include "MainWindow.h"
 
 nursewindow::nursewindow(QWidget *parent,nurse n)
     : QDialog(parent)
@@ -76,5 +76,13 @@ void nursewindow::on_pushButton_Assignment_clicked()
     }
 
     QMessageBox::information(this, tr("Patient List"), "Patients:\n" + patientList);
+}
+
+
+void nursewindow::on_pushButton_clicked()
+{
+    hide();
+    MainWindow* win=new MainWindow(this);
+    win->show();
 }
 

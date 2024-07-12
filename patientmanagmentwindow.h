@@ -39,6 +39,8 @@ private slots:
     void on_pushButtonSubmit_clicked();
 
 
+    void on_pushButton_clicked();
+
 private:
     Ui::PatientManagmentWindow *ui;
     QString username1;

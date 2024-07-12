@@ -189,3 +189,11 @@ void PatientManagmentWindow::on_pushButtonSubmit_clicked()
     }
 }
 
+
+void PatientManagmentWindow::on_pushButton_clicked()
+{
+    hide();
+    MainWindow* win=new MainWindow(this);
+    win->show();
+}
+

@@ -2,7 +2,6 @@
     <qresource prefix="/Images">
         <file>imageloginpage.jpg</file>
         <file>Imagepatientwindow</file>
-        <file>../hospitaljjj.jpg</file>
         <file>download.jpg</file>
         <file>another back.jpg</file>
         <file>hospital.jpg</file>

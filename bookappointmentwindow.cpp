@@ -154,10 +154,12 @@ void BookAppointmentWindow::on_slotsListView_itemClicked(QListWidgetItem *item)
         }
 
         if (!selectedSpecialty.isEmpty()) {
+           // currpat.appointments[selectedSlot]=selectedSpecialty;
             PatientManagmentWindow *parentWindow = qobject_cast<PatientManagmentWindow *>(parent());
             if (parentWindow) {
                 parentWindow->appointments[selectedSlot] = selectedSpecialty;
                 parentWindow->updateComboBoxes(); // Update the combo boxes
+            currpat.appointments[selectedSlot]=selectedSpecialty;
             }
        // }
       //  submitClicked = false; // Reset the flag after processing
@@ -167,6 +169,7 @@ void BookAppointmentWindow::on_slotsListView_itemClicked(QListWidgetItem *item)
 void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled yet
 {
     //submitClicked = true;
+    //int i= ui->slotsListView->currentIndex();
     QString selectedSlot = ui->slotsListView->currentItem()->text();
     QString selectedSpecialty;
 
@@ -220,35 +223,36 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
         }
     }
     // Display the schedule in the doctor's window
-    doctor doctorWindow(this, *findDoctorByUsername(selectedSlot));
-    doctorWindow.exec();
+    //doctor doctorWindow(this, *findDoctorByUsername(selectedSlot));
+    //doctorWindow.exec();
+    hide();
 }
-drclass* BookAppointmentWindow::findDoctorByUsername(const QString& username)
-{
-    for (auto& doc : Nutrition) {
-        if (doc.username == username) {
-            return &doc;
-        }
-    }
-    for (auto& doc : OG) {
-        if (doc.username == username) {
-            return &doc;
-        }
-    }
-    for (auto& doc : oph) {
-        if (doc.username == username) {
-            return &doc;
-        }
-    }
-    for (auto& doc : IM) {
-        if (doc.username == username) {
-            return &doc;
-        }
-    }
-    for (auto& doc : Derm) {
-        if (doc.username == username) {
-            return &doc;
-        }
-    }
-    return nullptr;
-}
+// drclass* BookAppointmentWindow::findDoctorByUsername(const QString& username)
+// {
+//     for (auto& doc : Nutrition) {
+//         if (doc.username == username) {
+//             return &doc;
+//         }
+//     }
+//     for (auto& doc : OG) {
+//         if (doc.username == username) {
+//             return &doc;
+//         }
+//     }
+//     for (auto& doc : oph) {
+//         if (doc.username == username) {
+//             return &doc;
+//         }
+//     }
+//     for (auto& doc : IM) {
+//         if (doc.username == username) {
+//             return &doc;
+//         }
+//     }
+//     for (auto& doc : Derm) {
+//         if (doc.username == username) {
+//             return &doc;
+//         }
+//     }
+//     return nullptr;
+// }

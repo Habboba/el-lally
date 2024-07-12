@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix(":/Images/hospital.jpg");
     QPixmap backgroundImage(":/Images/download.jpg");
 
-    // Set the background image
+    //Set the background image
     QBrush backgroundBrush(backgroundImage);
     QPalette palette = this->palette();
     palette.setBrush(QPalette::Window, backgroundBrush);
@@ -37,18 +37,70 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Nutrition,OG,IM,Ophthalmology,Dermatology
 
+    /////error add previosly added doctor
     for (int i=0;i<doctors.size();i++)
     {
         if (doctors[i].specialization=="Nutrition")
-            Nutrition.push_back(doctors[i]);
+        {
+            bool found=false;
+            for (int j=0;j<Nutrition.size();j++)
+            {
+                if (doctors[i].username==Nutrition[j].username)
+                    found=true;
+            }
+            if (!found)
+                Nutrition.push_back(doctors[i]);
+
+
+        }
         else if (doctors[i].specialization=="OG")
-            OG.push_back(doctors[i]);
+        {
+            bool found=false;
+            for (int j=0;j<OG.size();j++)
+            {
+                if (doctors[i].username==OG[j].username)
+                    found =true;
+            }
+            if (!found)
+                OG.push_back(doctors[i]);
+
+
+        }
         else if (doctors[i].specialization=="IM")
-            IM.push_back(doctors[i]);
+        {
+            bool found=false;
+            for (int j=0;j<IM.size();j++)
+            {
+                if (doctors[i].username==IM[j].username)
+                    found=true;
+            }
+            if (!found)
+                IM.push_back(doctors[i]);
+        }
         else if (doctors[i].specialization=="Dermatology")
-            Derm.push_back(doctors[i]);
+        {
+            bool found=false;
+            for (int j=0;j<Derm.size();j++)
+            {
+                if (doctors[i].username==Derm[j].username)
+                    found=true;
+            }
+            if (!found)
+                Derm.push_back(doctors[i]);
+
+        }
         else if (doctors[i].specialization=="Ophthalmology")
-            oph.push_back(doctors[i]);
+        {
+            bool found=false;
+            for (int j=0;j<oph.size();j++)
+            {
+                if (doctors[i].username==oph[j].username)
+                    found=true;
+            }
+            if (!found)
+                oph.push_back(doctors[i]);
+
+        }
 
     }
 }

@@ -24,6 +24,8 @@ private slots:
 
     void on_pushButton_Assignment_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::nursewindow *ui;
     nurse nur;

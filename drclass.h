@@ -15,11 +15,12 @@ public:
     /////specialization is only one of these five with the same writing as here (Nutrition,OG,IM,Ophthalmology,Dermatology)
     QString gender;
     int age;
-    QVector<QString> patientschedule;
+    //QVector<QString> patientschedule;
     QVector<QString> days;
     QVector<QString> patients;
     int starttime;
     int endtime;
+    bool operator==(const drclass& other);
 };
 
 #endif // DRCLASS_H

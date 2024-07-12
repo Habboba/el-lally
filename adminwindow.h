@@ -28,6 +28,8 @@ private slots:
 
     void on_nurse_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::adminwindow *ui;
     // QVector<doctor> doctors;

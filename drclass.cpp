@@ -13,3 +13,6 @@ drclass::drclass(QString n, QString p, QString s , QString g, int a,int st,int e
     endtime=e;
     days=d;
 }
+bool drclass::operator==(const drclass& other){
+    return(username==other.username);
+}

@@ -15,7 +15,7 @@ BookAppointmentWindow::BookAppointmentWindow(QWidget *parent,patient p)
     , ui(new Ui::BookAppointmentWindow)
 {
     ui->setupUi(this);
-    currpat=p;
+    patient currentpat;
     QPixmap backgroundImage(":/Images/download.jpg");
 
     // Set the background image
@@ -30,7 +30,7 @@ BookAppointmentWindow::BookAppointmentWindow(QWidget *parent,patient p)
     connect(ui->radioButton_internalmedicine, &QRadioButton::clicked, this, &BookAppointmentWindow::on_radioButton_internalmedicine_clicked);
     connect(ui->radioButton_Dermatology, &QRadioButton::clicked, this, &BookAppointmentWindow::on_radioButton_Dermatology_clicked);
     connect(ui->slotsListView, &QListWidget::itemClicked, this, &BookAppointmentWindow::on_slotsListView_itemClicked);
-   // connect(ui->pushButtonSubmit, &QPushButton::clicked, this, &BookAppointmentWindow::on_pushButtonSubmit_clicked);
+    // connect(ui->pushButtonSubmit, &QPushButton::clicked, this, &BookAppointmentWindow::on_pushButtonSubmit_clicked);
 }
 
 BookAppointmentWindow::~BookAppointmentWindow()
@@ -51,15 +51,15 @@ void BookAppointmentWindow::addSlotToList(const QString &slot)
 
 void BookAppointmentWindow::on_radioButton_Nutrition_clicked()
 {
-   ui->label_Available_slots->setText("Available slots and doctors are:");
+    ui->label_Available_slots->setText("Available slots and doctors are:");
     clearSlotsList();
-   for (int i=0;i<Nutrition.size();i++)
-   {
-       for (int j=0;j<Nutrition[i].days.size();j++)
-       {
-           addSlotToList(Nutrition[i].username+" on "+Nutrition[i].days[j]+" from "+QString::number(Nutrition[i].starttime)+" to "+QString::number(Nutrition[i].endtime));
-       }
-   }
+    for (int i=0;i<Nutrition.size();i++)
+    {
+        for (int j=0;j<Nutrition[i].days.size();j++)
+        {
+            addSlotToList(Nutrition[i].username+" on "+Nutrition[i].days[j]+" from "+QString::number(Nutrition[i].starttime)+" to "+QString::number(Nutrition[i].endtime));
+        }
+    }
 
     // addSlotToList("Slot A");
     // addSlotToList("Slot B");
@@ -78,9 +78,7 @@ void BookAppointmentWindow::on_radioButton_OG_clicked()
             addSlotToList(OG[i].username+" on "+OG[i].days[j]+" from "+QString::number(OG[i].starttime)+" to "+QString::number(OG[i].endtime));
         }
     }
-    // addSlotToList("Slot F");
-    // addSlotToList("Slot N");
-    // addSlotToList("Slot G");
+
 }
 
 
@@ -95,9 +93,7 @@ void BookAppointmentWindow::on_radioButton_Ophthalmology_clicked()
             addSlotToList(oph[i].username+" on "+oph[i].days[j]+" from "+QString::number(oph[i].starttime)+" to "+QString::number(oph[i].endtime));
         }
     }
-    // addSlotToList("Slot 1");
-    // addSlotToList("Slot 2");
-    // addSlotToList("Slot 3");
+
 }
 
 
@@ -112,9 +108,7 @@ void BookAppointmentWindow::on_radioButton_internalmedicine_clicked()
             addSlotToList(IM[i].username+" on "+IM[i].days[j]+" from "+QString::number(IM[i].starttime)+" to "+QString::number(IM[i].endtime));
         }
     }
-    // addSlotToList("Slot 3");
-    // addSlotToList("Slot 4");
-    // addSlotToList("Slot 5");
+
 }
 
 
@@ -129,48 +123,12 @@ void BookAppointmentWindow::on_radioButton_Dermatology_clicked()
             addSlotToList(Derm[i].username+" on "+Derm[i].days[j]+" from "+QString::number(Derm[i].starttime)+" to "+QString::number(Derm[i].endtime));
         }
     }
-    // addSlotToList("Slot 6");
-    // addSlotToList("Slot 7");
-    // addSlotToList("Slot 8");
 }
 
 
 void BookAppointmentWindow::on_slotsListView_itemClicked(QListWidgetItem *item)
 {
-    //if (submitClicked) {
-        QString selectedSlot = item->text();
-        QString selectedSpecialty;
-
-        if (ui->radioButton_Nutrition->isChecked()) {
-            selectedSpecialty = "Nutrition";
-        } else if (ui->radioButton_OG->isChecked()) {
-            selectedSpecialty = "OG";
-        } else if (ui->radioButton_Ophthalmology->isChecked()) {
-            selectedSpecialty = "Ophthalmology";
-        } else if (ui->radioButton_internalmedicine->isChecked()) {
-            selectedSpecialty = "Internal Medicine";
-        } else if (ui->radioButton_Dermatology->isChecked()) {
-            selectedSpecialty = "Dermatology";
-        }
-
-        if (!selectedSpecialty.isEmpty()) {
-           // currpat.appointments[selectedSlot]=selectedSpecialty;
-            PatientManagmentWindow *parentWindow = qobject_cast<PatientManagmentWindow *>(parent());
-            if (parentWindow) {
-                parentWindow->appointments[selectedSlot] = selectedSpecialty;
-                parentWindow->updateComboBoxes(); // Update the combo boxes
-            currpat.appointments[selectedSlot]=selectedSpecialty;
-            }
-       // }
-      //  submitClicked = false; // Reset the flag after processing
-    }
-}
-
-void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled yet
-{
-    //submitClicked = true;
-    //int i= ui->slotsListView->currentIndex();
-    QString selectedSlot = ui->slotsListView->currentItem()->text();
+    QString selectedSlot = item->text();
     QString selectedSpecialty;
 
     if (ui->radioButton_Nutrition->isChecked()) {
@@ -185,7 +143,43 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
         selectedSpecialty = "Dermatology";
     }
 
-//we still need to push_back(currpat.name) to the selected dr vector for the patientschedule only (the only remaining part in the patient part)
+    if (!selectedSpecialty.isEmpty()) {
+        // Update parent window's patient data
+        PatientManagmentWindow *parentWindow = qobject_cast<PatientManagmentWindow *>(parent());
+        if (parentWindow) {
+            parentWindow->currpat.appointments[selectedSlot] = selectedSpecialty;
+            parentWindow->currpat.saveAppointments(); // Save appointments to file for parent window's patient
+            parentWindow->updateComboBoxes(); // Update combo boxes in parent window
+        }
+        currpat.appointments[selectedSlot] = selectedSpecialty;
+        currpat.saveAppointments(); // Save appointments to file for current patient
+    }
+
+}
+
+void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled yet
+{
+    //submitClicked = true;
+    //int i= ui->slotsListView->currentIndex();
+    QString selectedSlot;
+    QListWidgetItem *currentItem = ui->slotsListView->currentItem();
+    if(currentItem){
+     selectedSlot = currentItem->text();
+    QString selectedSpecialty;
+
+    if (ui->radioButton_Nutrition->isChecked()) {
+        selectedSpecialty = "Nutrition";
+    } else if (ui->radioButton_OG->isChecked()) {
+        selectedSpecialty = "OG";
+    } else if (ui->radioButton_Ophthalmology->isChecked()) {
+        selectedSpecialty = "Ophthalmology";
+    } else if (ui->radioButton_internalmedicine->isChecked()) {
+        selectedSpecialty = "Internal Medicine";
+    } else if (ui->radioButton_Dermatology->isChecked()) {
+        selectedSpecialty = "Dermatology";
+    }
+
+    //we still need to push_back(currpat.name) to the selected dr vector for the patientschedule only (the only remaining part in the patient part)
     if (selectedSpecialty == "Nutrition") {
         for (int i = 0; i < Nutrition.size(); i++) {
             if (selectedSlot.contains(Nutrition[i].username)) {
@@ -197,6 +191,7 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
         for (int i = 0; i < OG.size(); i++) {
             if (selectedSlot.contains(OG[i].username)) {
                 OG[i].patients.push_back(currpat.name);
+
                 break;
             }
         }
@@ -211,6 +206,7 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
         for (int i = 0; i < IM.size(); i++) {
             if (selectedSlot.contains(IM[i].username)) {
                 IM[i].patients.push_back(currpat.name);
+
                 break;
             }
         }
@@ -222,6 +218,19 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
             }
         }
     }
+    else{
+         qDebug() << "No item selected in slotsListView.";
+        ui->labelERROR->setText("Please select a slot.");
+
+    }
+    }
+
+
+    //  PatientManagmentWindow *parentWindow = qobject_cast<PatientManagmentWindow *>(parent());
+    //if (parentWindow) {
+    //    parentWindow->currpat.appointments[selectedSlot] = selectedSpecialty;
+    //    parentWindow->updateComboBoxes(); // Update the combo boxes
+    // }
     // Display the schedule in the doctor's window
     //doctor doctorWindow(this, *findDoctorByUsername(selectedSlot));
     //doctorWindow.exec();
@@ -256,3 +265,4 @@ void BookAppointmentWindow::on_pushButtonSubmit_clicked()     ///not handeled ye
 //     }
 //     return nullptr;
 // }
+

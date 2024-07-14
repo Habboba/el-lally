@@ -156,6 +156,19 @@ font: 12pt &quot;Segoe UI&quot;;</string>
     <string>Submit</string>
    </property>
   </widget>
+  <widget class="QLabel" name="labelERROR">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>280</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

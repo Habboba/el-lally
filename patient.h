@@ -7,7 +7,7 @@ class patient
 {
 public:
     patient();
-     patient(QString n, QString p, int a, QString g);
+    patient(QString n, QString p, int a, QString g);
     QString username;
     QString pass;
     QString name; // Example: Name of the patient
@@ -15,6 +15,10 @@ public:
     QString chronicDiseases; // Example: Chronic diseases of the patient
     int age;
     QString gender;
+    void loadAppointments();
+    void saveAppointments();
+    QString getusername();
+    void setusername(QString username);
     // Add more fields as needed
     QMap<QString, QString> appointments;
 

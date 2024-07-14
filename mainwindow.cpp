@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->labelimagelogin->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
     ui->labelimagelogin->setVisible(true);
     ui->error->setVisible(false);
+    QString name = ui->lineEditUsername->text();
+    patient currentpat;
+    currentpat.setusername(name);
 
     //Nutrition,OG,IM,Ophthalmology,Dermatology
 

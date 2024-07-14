@@ -17,12 +17,16 @@ class PatientManagmentWindow : public QDialog
 public:
     explicit PatientManagmentWindow(QWidget *parent = nullptr,patient p=patient());
     ~PatientManagmentWindow();
-     void setUsername(const QString &username);
-     //void setPatient(const patient &patient);
-     QMap<QString, QString> appointments;
-     void addToAppointments(const QString &slot);
-     void updateComboBoxes();
+    void setUsername(const QString &username);
+    //void setPatient(const patient &patient);
+    //QMap<QString, QString> appointments;
+    void addToAppointments(const QString &slot);
+    void updateComboBoxes();
+    patient currpat;
 
+    void loadPatientData();
+    void loadAppointments();
+    void setCurrentPatient(const patient& p);
 
 
 private slots:
@@ -41,12 +45,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+
 private:
     Ui::PatientManagmentWindow *ui;
     QString username1;
-    patient currentPatient;
+    patient currentPat;
     bool submit = false; // Add this flag
-   // QMap<QString, QString> appointments;
+    // QMap<QString, QString> appointments;
 
 };
 

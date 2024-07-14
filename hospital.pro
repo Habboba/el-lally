@@ -12,7 +12,6 @@ SOURCES += \
     admin.cpp \
     adminwindow.cpp \
     bookappointmentwindow.cpp \
-    cancelappointmentwindow.cpp \
     chat.cpp \
     doctor.cpp \
     drclass.cpp \
@@ -30,7 +29,6 @@ HEADERS += \
     admin.h \
     adminwindow.h \
     bookappointmentwindow.h \
-    cancelappointmentwindow.h \
     chat.h \
     doctor.h \
     drclass.h \
@@ -46,7 +44,6 @@ HEADERS += \
 FORMS += \
     adminwindow.ui \
     bookappointmentwindow.ui \
-    cancelappointmentwindow.ui \
     chat.ui \
     doctor.ui \
     mainwindow.ui \
